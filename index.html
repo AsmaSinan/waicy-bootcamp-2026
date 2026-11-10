@@ -17,7 +17,7 @@
 
     <!-- رأس الصفحة -->
     <header class="w-full py-6 px-4 bg-[#1e3e62] shadow-md text-center border-b border-[#00000044]">
-        <div class="max-w-6xl mx-auto flex flex-col items-center justify-center">
+        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center">
             <h1 class="text-3xl md:text-5xl font-black text-white tracking-wider mb-1">معسكر وايسي</h1>
             <p class="text-lg md:text-xl font-bold text-sky-300 tracking-widest">WAICY BOOTCAMP 2026</p>
             <div id="syncStatus" class="mt-2 text-xs px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300">جاري الاتصال بالسحابة...</div>
@@ -25,7 +25,7 @@
     </header>
 
     <!-- المحتوى الرئيسي -->
-    <main class="max-w-6xl w-full mx-auto p-4 flex-grow">
+    <main class="max-w-4xl w-full mx-auto p-4 flex-grow">
         
         <!-- شريط البحث والترتيب -->
         <div class="mb-6 flex flex-col sm:flex-row gap-3 items-center justify-between">
@@ -43,34 +43,21 @@
             </div>
         </div>
 
-        <!-- تقسيم الشاشة إلى عمودين: الأولاد يميناً والبنات يساراً -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- قسم الأولاد (يمين) -->
-            <div class="bg-[#122338] p-4 rounded-2xl border border-sky-500/20">
-                <div class="flex items-center justify-between mb-4 border-b border-sky-500/30 pb-2">
-                    <h2 class="text-xl font-black text-sky-300">👦 الأولاد</h2>
-                    <span id="boysCount" class="text-xs bg-sky-900/50 text-sky-200 px-2.5 py-1 rounded-lg">0 طالب</span>
-                </div>
-                <div id="boysContainer" class="space-y-3"></div>
-            </div>
-
-            <!-- قسم البنات (يسار) -->
-            <div class="bg-[#122338] p-4 rounded-2xl border border-pink-500/20">
-                <div class="flex items-center justify-between mb-4 border-b border-pink-500/30 pb-2">
-                    <h2 class="text-xl font-black text-pink-300">👧 البنات</h2>
-                    <span id="girlsCount" class="text-xs bg-pink-900/50 text-pink-200 px-2.5 py-1 rounded-lg">0 طالبة</span>
-                </div>
-                <div id="girlsContainer" class="space-y-3"></div>
-            </div>
-
+        <!-- قائمة الطلاب الموحدة -->
+        <div id="studentsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <!-- تعبئة الطلاب برمجياً -->
         </div>
 
     </main>
 
-    <!-- الفوتر -->
-    <footer class="w-full py-4 text-center text-gray-400 border-t border-[#1e3e62] mt-8">
-        <p class="text-sm font-semibold">إجمالي عدد الطلاب والطالبات في المعسكر: <span id="totalStudentsCount" class="text-sky-300 font-bold">51</span></p>
+    <!-- الفوتر (أسفل الصفحة) -->
+    <footer class="w-full py-6 text-center text-gray-400 border-t border-[#1e3e62] mt-8 flex flex-col items-center gap-3">
+        <p class="text-sm font-semibold">إجمالي عدد الطلاب في المعسكر: <span id="totalStudentsCount" class="text-sky-300 font-bold">51</span></p>
+        
+        <!-- زر إلغاء جميع التقييمات والفيد باك -->
+        <button onclick="clearAllFeedbacks()" class="px-4 py-2 bg-red-900/40 hover:bg-red-900/80 text-red-300 border border-red-700/50 rounded-xl transition text-xs font-bold shadow-md cursor-pointer">
+            🗑️ مسح جميع تقييمات وفيد باك المدربين للجميع
+        </button>
     </footer>
 
     <!-- نافذة تعديل بيانات الطالب -->
@@ -169,57 +156,57 @@
         };
 
         const initialStudents = [
-            { id: 1, name: "محمد عمير القحطاني", score: 90, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 2, name: "دانة تركي الحربي", score: 87, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 3, name: "ديم تركي الحربي", score: 94, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 4, name: "محمد وليد صنقر", score: 117, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 5, name: "Saad Abdulaziz Alshafi", score: 91, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 6, name: "Mohamad Mustafa Alshamma", score: 95, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 7, name: "Abdullah Asim Alotaibi", score: 100, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 8, name: "Bandar Asim Alotaibi", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 9, name: "Musaed Bader Alsayyar", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 10, name: "Nasser Bader Alsayyar", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 11, name: "إبراهيم محمد حمدالله علي", score: 70, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 12, name: "حنين محمد حمدالله", score: 101, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 13, name: "عائشة قاسم ال حسين", score: 113, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 14, name: "Hala Ahmad Abdullah Al Shath", score: 100, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 15, name: "حلا مبارك بامنقاء", score: 116, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 16, name: "Adam mohamed mohsen", score: 115, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 17, name: "Yassein Mohammed mohsen", score: 113, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 18, name: "Mohsen Mohammed mohsen", score: 90, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 19, name: "وجن سلطان آل مفرح", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 20, name: "فاطمه احمد الصالح", score: 95, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 21, name: "Ward Shaat", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 22, name: "محمد علي القحطاني", score: 117, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 23, name: "نايف مساعد العبدالكريم", score: 111, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 24, name: "عبدالعزيز مروان زارع", score: 96, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 25, name: "فيصل عمر", score: 94, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 26, name: "يزن خالد الشهري", score: 112, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 27, name: "فهد صالح الملحم", score: 117, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 28, name: "جوري محمد محمد الانصاري", score: 0, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 29, name: "شيخة محمد باوزير", score: 107, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 30, name: "يوسف وجدي", score: 126, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 31, name: "أوس أبو لبدة", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 32, name: "عمر وجدي", score: 123, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 33, name: "جيانا بيلين", score: 129, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 34, name: "كرستين قابرييل", score: 127, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 35, name: "كوثر زكريا علي الحرز", score: 138, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 36, name: "حلا حسن احمد نخيفي", score: 122, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 37, name: "دانه بدر سالم عبدالله", score: 0, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 38, name: "الجود يحي محسن مجرشي", score: 120, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 39, name: "مساعد الزهراني", score: 103, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 40, name: "نايف سعد محمد مبارك المهري", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 41, name: "Abdelrahman Hesham Darwish", score: 112, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 42, name: "نواف سعد القاضي", score: 107, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 43, name: "Faris Abdullah Albur", score: 0, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "boy" },
-            { id: 44, name: "نرجس الحرز", score: 127, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 45, name: "يافا البشير", score: 108, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 46, name: "حلا الهذلي", score: 112, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 47, name: "ديم القاضي", score: 111, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 48, name: "تالا مخدوم", score: 121, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 49, name: "توليب السلامة", score: 100, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 50, name: "الجازي عسيري", score: 114, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" },
-            { id: 51, name: "بيسان عسيري", score: 114, badge: "", feedback: "", instructor: "", tracks: [], idea: "", gender: "girl" }
+            { id: 1, name: "محمد عمير القحطاني", score: 90, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 2, name: "دانة تركي الحربي", score: 87, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 3, name: "ديم تركي الحربي", score: 94, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 4, name: "محمد وليد صنقر", score: 117, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 5, name: "Saad Abdulaziz Alshafi", score: 91, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 6, name: "Mohamad Mustafa Alshamma", score: 95, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 7, name: "Abdullah Asim Alotaibi", score: 100, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 8, name: "Bandar Asim Alotaibi", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 9, name: "Musaed Bader Alsayyar", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 10, name: "Nasser Bader Alsayyar", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 11, name: "إبراهيم محمد حمدالله علي", score: 70, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 12, name: "حنين محمد حمدالله", score: 101, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 13, name: "عائشة قاسم ال حسين", score: 113, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 14, name: "Hala Ahmad Abdullah Al Shath", score: 100, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 15, name: "حلا مبارك بامنقاء", score: 116, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 16, name: "Adam mohamed mohsen", score: 115, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 17, name: "Yassein Mohammed mohsen", score: 113, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 18, name: "Mohsen Mohammed mohsen", score: 90, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 19, name: "وجن سلطان آل مفرح", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 20, name: "فاطمه احمد الصالح", score: 95, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 21, name: "Ward Shaat", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 22, name: "محمد علي القحطاني", score: 117, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 23, name: "نايف مساعد العبدالكريم", score: 111, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 24, name: "عبدالعزيز مروان زارع", score: 96, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 25, name: "فيصل عمر", score: 94, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 26, name: "يزن خالد الشهري", score: 112, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 27, name: "فهد صالح الملحم", score: 117, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 28, name: "جوري محمد محمد الانصاري", score: 0, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 29, name: "شيخة محمد باوزير", score: 107, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 30, name: "يوسف وجدي", score: 126, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 31, name: "أوس أبو لبدة", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 32, name: "عمر وجدي", score: 123, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 33, name: "جيانا بيلين", score: 129, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 34, name: "كرستين قابرييل", score: 127, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 35, name: "كوثر زكريا علي الحرز", score: 138, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 36, name: "حلا حسن احمد نخيفي", score: 122, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 37, name: "دانه بدر سالم عبدالله", score: 0, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 38, name: "الجود يحي محسن مجرشي", score: 120, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 39, name: "مساعد الزهراني", score: 103, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 40, name: "نايف سعد محمد مبارك المهري", score: 105, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 41, name: "Abdelrahman Hesham Darwish", score: 112, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 42, name: "نواف سعد القاضي", score: 107, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 43, name: "Faris Abdullah Albur", score: 0, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 44, name: "نرجس الحرز", score: 127, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 45, name: "يافا البشير", score: 108, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 46, name: "حلا الهذلي", score: 112, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 47, name: "ديم القاضي", score: 111, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 48, name: "تالا مخدوم", score: 121, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 49, name: "توليب السلامة", score: 100, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 50, name: "الجازي عسيري", score: 114, badge: "", feedback: "", instructor: "", tracks: [], idea: "" },
+            { id: 51, name: "بيسان عسيري", score: 114, badge: "", feedback: "", instructor: "", tracks: [], idea: "" }
         ];
 
         let students = [];
@@ -245,7 +232,7 @@
             
             dbRef.on('value', (snapshot) => {
                 const data = snapshot.val();
-                if (data && data.length > 0 && data[0].gender) {
+                if (data) {
                     students = data;
                 } else {
                     students = initialStudents;
@@ -268,10 +255,8 @@
         }
 
         function renderStudents() {
-            const boysContainer = document.getElementById('boysContainer');
-            const girlsContainer = document.getElementById('girlsContainer');
-            boysContainer.innerHTML = '';
-            girlsContainer.innerHTML = '';
+            const container = document.getElementById('studentsContainer');
+            container.innerHTML = '';
 
             const filter = document.getElementById('searchInput').value.toLowerCase();
             const sortBy = document.getElementById('sortSelect').value;
@@ -292,68 +277,55 @@
                 filtered.sort((a, b) => a.id - b.id);
             }
 
-            let boysList = filtered.filter(s => s.gender === 'boy');
-            let girlsList = filtered.filter(s => s.gender === 'girl');
-
-            document.getElementById('boysCount').innerText = boysList.length + ' طالب';
-            document.getElementById('girlsCount').innerText = girlsList.length + ' طالبة';
             document.getElementById('totalStudentsCount').innerText = students.length;
 
-            boysList.forEach(student => {
-                boysContainer.appendChild(createStudentCard(student));
-            });
+            filtered.forEach(student => {
+                const card = document.createElement('div');
+                card.className = "card-bg p-3 rounded-xl flex flex-col justify-between cursor-pointer hover:border-sky-400 transition shadow-md gap-2";
+                card.onclick = () => openModal(student.id);
 
-            girlsList.forEach(student => {
-                girlsContainer.appendChild(createStudentCard(student));
-            });
-        }
+                let tracksHtml = '';
+                if (student.tracks && student.tracks.length > 0) {
+                    tracksHtml = `<div class="flex flex-wrap gap-1 mt-1">`;
+                    student.tracks.forEach(t => {
+                        tracksHtml += `<span class="text-[10px] bg-sky-900/70 text-sky-200 px-2 py-0.5 rounded-full border border-sky-700/50">${t}</span>`;
+                    });
+                    tracksHtml += `</div>`;
+                }
 
-        function createStudentCard(student) {
-            const card = document.createElement('div');
-            card.className = "card-bg p-3 rounded-xl flex flex-col justify-between cursor-pointer hover:border-sky-400 transition shadow-md gap-2";
-            card.onclick = () => openModal(student.id);
+                let ideaHtml = '';
+                if (student.idea) {
+                    ideaHtml = `<div class="text-[11px] text-gray-300 bg-black/30 px-2 py-1 rounded-lg mt-1 italic border-r-2 border-sky-400">
+                        💡 الفكرة: ${student.idea}
+                    </div>`;
+                }
 
-            let tracksHtml = '';
-            if (student.tracks && student.tracks.length > 0) {
-                tracksHtml = `<div class="flex flex-wrap gap-1 mt-1">`;
-                student.tracks.forEach(t => {
-                    tracksHtml += `<span class="text-[10px] bg-sky-900/70 text-sky-200 px-2 py-0.5 rounded-full border border-sky-700/50">${t}</span>`;
-                });
-                tracksHtml += `</div>`;
-            }
+                let feedbackHtml = '';
+                if (student.feedback && student.instructor) {
+                    feedbackHtml = `<div class="text-[11px] text-emerald-200 bg-emerald-950/60 px-2 py-1 rounded-lg mt-1 border border-emerald-800/40">
+                        ${student.feedback} <span class="text-gray-400">(${student.instructor})</span>
+                    </div>`;
+                }
 
-            let ideaHtml = '';
-            if (student.idea) {
-                ideaHtml = `<div class="text-[11px] text-gray-300 bg-black/30 px-2 py-1 rounded-lg mt-1 italic border-r-2 border-sky-400">
-                    💡 الفكرة: ${student.idea}
-                </div>`;
-            }
-
-            let feedbackHtml = '';
-            if (student.feedback && student.instructor) {
-                feedbackHtml = `<div class="text-[11px] text-emerald-200 bg-emerald-950/60 px-2 py-1 rounded-lg mt-1 border border-emerald-800/40">
-                    ${student.feedback} <span class="text-gray-400">(${student.instructor})</span>
-                </div>`;
-            }
-
-            card.innerHTML = `
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2 overflow-hidden">
-                        <span class="text-xl">${student.badge || ''}</span>
-                        <div class="truncate">
-                            <h4 class="font-bold text-sm text-white truncate">${student.name}</h4>
-                            <span class="text-[10px] text-gray-400">انقر للتعديل والتقييم</span>
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 overflow-hidden">
+                            <span class="text-xl">${student.badge || ''}</span>
+                            <div class="truncate">
+                                <h4 class="font-bold text-sm text-white truncate">${student.name}</h4>
+                                <span class="text-[10px] text-gray-400">انقر للتعديل والتقييم</span>
+                            </div>
+                        </div>
+                        <div class="text-lg font-black text-sky-400 bg-black/30 px-2.5 py-1 rounded-xl min-w-[50px] text-center">
+                            ${student.score}
                         </div>
                     </div>
-                    <div class="text-lg font-black text-sky-400 bg-black/30 px-2.5 py-1 rounded-xl min-w-[50px] text-center">
-                        ${student.score}
-                    </div>
-                </div>
-                ${tracksHtml}
-                ${ideaHtml}
-                ${feedbackHtml}
-            `;
-            return card;
+                    ${tracksHtml}
+                    ${ideaHtml}
+                    ${feedbackHtml}
+                `;
+                container.appendChild(card);
+            });
         }
 
         function openModal(id) {
@@ -368,7 +340,6 @@
             document.getElementById('feedbackType').value = student.feedback || '';
             document.getElementById('feedbackInstructor').value = student.instructor || '';
             
-            // تحديد المسارات المحددة مسبقاً
             const checkboxes = document.querySelectorAll('.track-checkbox');
             checkboxes.forEach(cb => {
                 cb.checked = student.tracks && student.tracks.includes(cb.value);
@@ -421,17 +392,12 @@
             if (currentActiveId === null) return;
             const student = students.find(s => s.id === currentActiveId);
             if (student) {
-                // حفظ المسارات المختارة
                 const selectedTracks = [];
                 document.querySelectorAll('.track-checkbox:checked').forEach(cb => {
                     selectedTracks.push(cb.value);
                 });
                 student.tracks = selectedTracks;
-
-                // حفظ فكرة المشروع
                 student.idea = document.getElementById('projectIdeaInput').value.trim();
-
-                // حفظ الفيد باك والمدرب
                 student.feedback = document.getElementById('feedbackType').value;
                 student.instructor = document.getElementById('feedbackInstructor').value;
 
@@ -448,6 +414,17 @@
                 student.instructor = '';
                 updateCloud();
                 closeModal();
+            }
+        }
+
+        // دالة مسح جميع التقييمات لجميع الطلاب
+        function clearAllFeedbacks() {
+            if (confirm("هل أنت متأكد من رغبتك في مسح جميع تقييمات وفيد باك المدربين لجميع الطلاب؟")) {
+                students.forEach(student => {
+                    student.feedback = '';
+                    student.instructor = '';
+                });
+                updateCloud();
             }
         }
 
